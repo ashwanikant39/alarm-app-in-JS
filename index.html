@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alarm CLock</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- <h1>Hello world</h1> -->
+    <div class="container">
+      <div class="showCurrentTime">00:00:00</div>
+      <form
+        action="#"
+        id="formField"
+        name="myForm"
+        onsubmit="return validateForm()"
+      >
+        <div class="alarmInput">
+          <input
+            id="inputHour"
+            class="inputAlarmTime"
+            placeholder="00"
+            type="number"
+            min="1"
+            max="12"
+            name="fHour"
+            required
+          />
+          <span id="showErrMsg"></span>
+          <input
+            id="inputMinuts"
+            class="inputAlarmTime"
+            placeholder="00"
+            type="number"
+            min="0"
+            max="59"
+            name="fMinute"
+            required
+          />
+          <!-- <span id="hourValid">hello</span> -->
+          <select name="" id="selectAmPm">
+            <!-- <option value="AM"></option> -->
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+        <input id="setAlarm" type="submit" value="Set Alarm" />
+      </form>
+
+      <div class="addAlarmContainer">
+        <div class="show-alarm" id="show-hide-alarm">
+          <div class="alarmlist" id="printAlarm">
+            2:22
+            <span id="showAmPm">PM</span>
+          </div>
+
+          <div class="alarmlist" id="OnOff">
+            <label for="checkbox" id="checkBox-label">
+              <input type="checkbox" id="checkbox" />
+              <div class="slider">hello</div>
+            </label>
+          </div>
+          <div class="alarmlist" id="delete">
+            <img
+              id="delIcon"
+              src="https://cdn-icons-png.flaticon.com/128/1214/1214428.png"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

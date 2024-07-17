@@ -1,0 +1,161 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  /* margin: auto; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ede8f5;
+}
+.container {
+  /* background-color: transparent; */
+  background-color: #adbbda;
+  height: 60vh;
+  min-width: 35%;
+  /* width: 30%; */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  border-radius: 20px;
+  /* border: 1px solid gray; */
+  box-shadow: 2px 2px 11px 0px gray;
+}
+.container .showCurrentTime {
+  /* color: rgb(49, 45, 45); */
+  color: #3d52a0;
+  font-size: 40px;
+  font-weight: 600;
+  padding-top: 55px;
+}
+.alarmInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+.alarmInput .inputAlarmTime {
+  width: 60px;
+  /* background-color: red; */
+  margin-top: 34px;
+  border: 1px solid gray;
+  border-radius: 7px;
+  /* background-color: red; */
+  font-size: 25px;
+  outline: none;
+  padding: 3px;
+  background-color: #ede8f5;
+}
+.alarmInput #selectAmPm {
+  width: 60px;
+  /* background-color: red; */
+  margin-top: 34px;
+  border: 1px solid gray;
+  border-radius: 7px;
+  /* background-color: red; */
+  font-size: 20px;
+  /* width: 45px; */
+  height: 36px;
+  outline: none;
+  background-color: #ede8f5;
+}
+#selctAmPm input {
+  color: red;
+}
+#showErrMsg {
+  color: red;
+  /* display: none; */
+  font-size: 12px;
+  position: absolute;
+  bottom: -17px;
+  left: 03px;
+}
+#formField {
+  display: flex;
+  flex-direction: column;
+}
+#setAlarm {
+  /* padding: 20px; */
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 30px;
+  border: 1px solid gray;
+  background-color: #7051e6;
+  margin: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+#setAlarm:hover {
+  /* transform: scale(103%); */
+  background-color: #5856ee;
+}
+#setAlarm:active {
+  transform: scale(103%);
+  animation: alarmBtnZoom 50ms;
+}
+@keyframes alarmBtnZoom {
+  100% {
+    transform: scale(103%);
+  }
+}
+.addAlarmContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid red; */
+  width: 90%;
+}
+.addAlarmContainer .show-alarm {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  width: 80%;
+  gap: 50px;
+  padding: 10px;
+  border-bottom: 2px solid rgb(61, 61, 63);
+}
+.hide-alarm {
+  display: none;
+}
+
+.show-alarm #printAlarm {
+  font-size: 26px;
+  font-weight: 600;
+  color: #3633d4;
+}
+#delIcon {
+  height: 30px;
+  cursor: pointer;
+}
+
+#OnOff {
+  background-color: rgb(213, 209, 209);
+  width: 50px;
+  height: 30px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  position: relative;
+  transform: translateX(70px);
+  border-radius: 50px;
+  /* top: -5px; */
+}
+
+#checkBox-label {
+  background-color: red;
+  width: 40px;
+}
+.slider {
+  /* color: green; */
+}
