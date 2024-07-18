@@ -134,10 +134,10 @@ body {
   font-weight: 600;
   color: #3633d4;
 }
-#delIcon {
+/* #delIcon {
   height: 30px;
   cursor: pointer;
-}
+} */
 
 #OnOff {
   background-color: #ccc;
@@ -147,7 +147,7 @@ body {
   /* justify-content: center; */
   align-items: center;
   position: relative;
-  transform: translateX(70px);
+  /* transform: translateX(70px); */
   border-radius: 50px;
   /* top: -5px; */
 }
