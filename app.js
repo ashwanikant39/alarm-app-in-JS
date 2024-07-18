@@ -4,24 +4,72 @@ let setAlarmBtn = document.querySelector("#setAlarm");
 let formField = document.querySelector("#formField");
 let audio = new Audio("alarmCopy.mp3");
 
-// 2. Check tha input validation for Hours
-inputHour.addEventListener("input", () => {
-  if (inputHour.value > 12) {
-    inputValid.innerHTML = "Can't enter Greater than 12";
-    inputHour.style.border = "1px solid red";
+// 5. calculate time for alarm
+let compareTime = (inputHour, inputMinuts) => {
+  // compare time in every Second
+  setInterval(() => {
+    let currentdate = new Date();
+    let currentHour = currentdate.getHours();
+    let currentMin = currentdate.getMinutes();
+
+    // Convert input time to Integer formate
+    inputHour = parseInt(inputHour);
+    inputMinuts = parseInt(inputMinuts);
+
+    // Get checkbox value
+    let checkBox = document.querySelector("#checkbox");
+
+    // Compare time only when checkbox is checked
+    // if user unchecked the checkbox it's mean he want to stop alarm so run audio.pause
+    if (checkBox.checked) {
+      if (inputHour == currentHour && inputMinuts == currentMin) {
+        audio.play();
+        // console.log("Alarm Ringing...");
+      } else {
+        // console.log("Time left");
+      }
+    } else {
+      audio.pause();
+    }
+  }, 1000);
+};
+
+// 4. After enter details submit form
+function validateForm() {
+  // Get the input values of Hours and Minutes
+  let inputHour = document.querySelector("#inputHour").value;
+  let inputMinuts = document.querySelector("#inputMinuts").value;
+  let amPm = document.querySelector("#selectAmPm").value;
+
+  // Add 0 if there is only ! digit
+  inputHour = inputHour < 10 ? "0" + inputHour : inputHour;
+  inputMinuts = inputMinuts < 10 ? "0" + inputMinuts : inputMinuts;
+
+  //print only last two digits of Hours and Minutes
+  printAlarm.innerHTML = `${inputHour.slice(-2)}:${inputMinuts.slice(
+    -2
+  )} ${amPm}`;
+
+  // Show alarm on Screen
+  let showAlarm = document.querySelector(".hide-alarm");
+  showAlarm.classList.add("show-alarm");
+
+  // Make 12 Formate time to 24 Formate
+  if (amPm == "PM") {
+    if (inputHour < 12) {
+      inputHour = parseInt(inputHour) + 12;
+    }
+  } else if (amPm == "AM") {
+    if (inputHour == 12) {
+      inputHour = 0;
+    }
   }
-  if (inputHour.value < 1) {
-    inputValid.innerHTML = "Can't enter Less than 1";
-    inputHour.style.border = "1px solid red";
-  }
-  if (
-    (inputHour.value > 0 && inputHour.value <= 12) ||
-    inputHour.value === ""
-  ) {
-    inputValid.innerHTML = "";
-    inputHour.style.border = "1px solid green";
-  }
-});
+
+  // Sent  entered time to another function
+  compareTime(inputHour, inputMinuts);
+
+  return false; //Stop to reload function on onSubmit
+}
 
 // 3.  Check tha input validation for Minutes
 inputMinuts.addEventListener("input", () => {
@@ -42,109 +90,24 @@ inputMinuts.addEventListener("input", () => {
   }
 });
 
-let compareTime = (inputHour, inputMinuts) => {
-  setInterval(() => {
-    let currentdate = new Date();
-    let currentHour = currentdate.getHours();
-    let currentMin = currentdate.getMinutes();
-
-    // Again conver Current Hour to string
-    inputHour = parseInt(inputHour);
-    inputMinuts = parseInt(inputMinuts);
-    // console.log(`Current time ${currentHour}:${currentMin}`);
-    // console.log(`input time ${inputHour}:${inputMinuts}`);
-
-    // console.log("current h type " + typeof currentHour);
-    // console.log("current m type " + typeof currentMin);
-    // console.log("input h type " + typeof inputHour);
-    // console.log("input m type " + typeof inputMinuts);
-
-    let checkBox = document.querySelector("#checkBox");
-
-    if (checkBox.checked) {
-      if (inputHour == currentHour && inputMinuts == currentMin) {
-        audio.play();
-        // console.log("Alarm Ringing...");
-      } else {
-        // console.log("Time left");
-      }
-    } else {
-      audio.pause();
-    }
-  }, 1000);
-
-  // console.log("input Time " + inputHour + ":" + inputMinuts + " " + amPm);
-  // console.log("Current time " + currentHour + ":" + currentMin);
-
-  // console.log("current h " + currentHour);
-  // console.log("input h " + inputHour.value);
-  // console.log(typeof inputHour);
-
-  // console.log(typeof inputHour);
-};
-
-// 4. After enter details submit form
-function validateForm() {
-  // Get the input values of Hours and Minutes
-  let inputHour = document.querySelector("#inputHour").value;
-  let inputMinuts = document.querySelector("#inputMinuts").value;
-  let amPm = document.querySelector("#selectAmPm").value;
-
-  // Add 0 if there is only ! digit
-  inputHour = inputHour < 10 ? "0" + inputHour : inputHour;
-  inputMinuts = inputMinuts < 10 ? "0" + inputMinuts : inputMinuts;
-
-  // console.log(
-  //   "Entered time: " +
-  //     inputHour +
-  //     ":" +
-  //     inputMinuts +
-  //     ":" +
-  //     amPm +
-  //     " Type of AMPM" +
-  //     typeof amPm
-  // );
-
-  // Add alarm to Screen
-  // let showAlarm = document.querySelector(".hide-alarm");
-  // let printAlarm = document.querySelector("#printAlarm");
-
-  // showAlarm.classList.add("show-alarm");
-  // showAlarm.classList.remove("show-alarms");
-
-  printAlarm.innerHTML = `${inputHour.slice(-2)}:${inputMinuts.slice(
-    -2
-  )} ${amPm}`;
-
-  // Make 12 Formate time to 24 Formate
-  if (amPm == "PM") {
-    if (inputHour < 12) {
-      // inputHour=inputHour
-      inputHour = parseInt(inputHour) + 12;
-    }
-  } else if (amPm == "AM") {
-    if (inputHour == 12) {
-      inputHour = 0;
-    }
+// 2. Check tha input validation for Hours
+inputHour.addEventListener("input", () => {
+  if (inputHour.value > 12) {
+    inputValid.innerHTML = "Can't enter Greater than 12";
+    inputHour.style.border = "1px solid red";
   }
-
-  if (checkBox.checked) {
-    compareTime(inputHour, inputMinuts);
-
-    // console.log("checked");
-  } else {
-    audio.pause();
-    // console.log("not checked");
+  if (inputHour.value < 1) {
+    inputValid.innerHTML = "Can't enter Less than 1";
+    inputHour.style.border = "1px solid red";
   }
-
-  // console.log("Formated time: " + inputHour + ":" + inputMinuts);
-
-  // Call the funtion for compare input time and real time
-
-  // Clear the input after submit form
-
-  return false;
-}
+  if (
+    (inputHour.value > 0 && inputHour.value <= 12) ||
+    inputHour.value === ""
+  ) {
+    inputValid.innerHTML = "";
+    inputHour.style.border = "1px solid green";
+  }
+});
 
 // 1
 // Display tha real Time in every Second
@@ -153,8 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let date1 = new Date();
     let currentTime = date1.toLocaleTimeString();
 
-    // console.log(typeof (parseInt(date1.getHours()) + " ") + date1.getHours());
-    // console.log(currentTime.getHours);
+    // Print Live time on Screen
     showCurrentTime.innerHTML = currentTime;
   }, 1000);
 });

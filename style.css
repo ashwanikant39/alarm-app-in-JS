@@ -140,9 +140,9 @@ body {
 }
 
 #OnOff {
-  background-color: rgb(213, 209, 209);
+  background-color: #ccc;
   width: 50px;
-  height: 30px;
+  height: 27px;
   display: flex;
   /* justify-content: center; */
   align-items: center;
@@ -153,9 +153,41 @@ body {
 }
 
 #checkBox-label {
-  background-color: red;
-  width: 40px;
+  /* background-color: red; */
+  width: 50px;
+  cursor: pointer;
 }
-.slider {
-  /* color: green; */
+
+input[type="checkbox"]:checked + .slider {
+  background-color: #2196f3;
+  height: 23px;
+  width: 23px;
+  border-radius: 25px;
+  animation: slider 100ms ease forwards;
+  /* transform: translateX(100%); */
+}
+@keyframes slider {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+input[type="checkbox"] + .slider {
+  background-color: #ffffff;
+  height: 23px;
+  width: 23px;
+  border-radius: 25px;
+  animation: sliderBack 100ms ease forwards;
+}
+@keyframes sliderBack {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(20%);
+  }
+}
+
+input[type="checkbox"] {
+  display: none;
 }
