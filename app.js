@@ -3,6 +3,7 @@ let inputValid = document.querySelector("#showErrMsg");
 let setAlarmBtn = document.querySelector("#setAlarm");
 let formField = document.querySelector("#formField");
 let audio = new Audio("alarmCopy.mp3");
+let remTime = document.querySelector(".remTime");
 
 // 5. calculate time for alarm
 let compareTime = (inputHour, inputMinuts) => {
@@ -18,10 +19,46 @@ let compareTime = (inputHour, inputMinuts) => {
 
     // Get checkbox value
     let checkBox = document.querySelector("#checkbox");
+    // console.log(`Input time: ${inputHour}:${inputMinuts}`);
+    // console.log(`Current time: ${currentHour}:${currentMin}`);
+
+    // Variable to store remaining time
+    let remHour;
+    let remMin;
+
+    //calculate the Remaining time
+    if (currentHour < inputHour) {
+      if (currentMin <= inputMinuts) {
+        remHour = inputHour - currentHour;
+        remMin = inputMinuts - currentMin;
+      } else if (currentMin > inputMinuts) {
+        remHour = inputHour - 1 - currentHour;
+        remMin = inputMinuts + 60 - currentMin;
+      }
+    } else if (currentHour > inputHour) {
+      if (currentMin <= inputMinuts) {
+        remHour = 24 - currentHour + inputHour;
+        remMin = inputMinuts - currentMin;
+      } else if (currentMin > inputMinuts) {
+        remHour = 24 - currentHour + inputHour - 1;
+        remMin = inputMinuts + 60 - currentMin;
+      }
+    } else {
+      if (currentMin <= inputMinuts) {
+        remHour = inputHour - currentHour;
+        remMin = inputMinuts - currentMin;
+      } else if (currentMin > inputMinuts) {
+        remHour = 24 - currentHour + inputHour - 1;
+        remMin = inputMinuts + 60 - currentMin;
+      }
+    }
 
     // Compare time only when checkbox is checked
     // if user unchecked the checkbox it's mean he want to stop alarm so run audio.pause
     if (checkBox.checked) {
+      remTime.classList.add("remTime");
+      remTime.classList.remove("remTimeHide");
+      remTime.innerHTML = `Ring in ${remHour}h ${remMin}m`;
       if (inputHour == currentHour && inputMinuts == currentMin) {
         audio.play();
         // console.log("Alarm Ringing...");
@@ -29,6 +66,8 @@ let compareTime = (inputHour, inputMinuts) => {
         // console.log("Time left");
       }
     } else {
+      remTime.classList.add("remTimeHide");
+      remTime.classList.remove("remTime");
       audio.pause();
     }
   }, 1000);

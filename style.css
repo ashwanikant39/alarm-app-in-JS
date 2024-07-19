@@ -17,7 +17,7 @@ body {
 .container {
   /* background-color: transparent; */
   background-color: #adbbda;
-  height: 60vh;
+  min-height: 30vh;
   min-width: 35%;
   /* width: 30%; */
   display: flex;
@@ -122,8 +122,10 @@ body {
   /* align-items: center; */
   width: 80%;
   gap: 50px;
-  padding: 10px;
+  padding: 14px;
   border-bottom: 2px solid rgb(61, 61, 63);
+  position: relative;
+  margin-bottom: 40px;
 }
 .hide-alarm {
   display: none;
@@ -159,7 +161,7 @@ body {
 }
 
 input[type="checkbox"]:checked + .slider {
-  background-color: #2196f3;
+  /* background-color: #2196f3; */
   height: 23px;
   width: 23px;
   border-radius: 25px;
@@ -167,7 +169,12 @@ input[type="checkbox"]:checked + .slider {
   /* transform: translateX(100%); */
 }
 @keyframes slider {
+  0% {
+    transform: translateX(20%);
+    background-color: white;
+  }
   100% {
+    background-color: #2196f3;
     transform: translateX(100%);
   }
 }
@@ -181,13 +188,30 @@ input[type="checkbox"] + .slider {
 }
 @keyframes sliderBack {
   0% {
+    background-color: #2196f3;
     transform: translateX(100%);
   }
   100% {
+    background-color: white;
     transform: translateX(20%);
   }
 }
 
 input[type="checkbox"] {
+  display: none;
+}
+
+.remTime {
+  /* background-color: red; */
+  /* height: 300px; */
+  /* display: none; */
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  font-size: 12px;
+  color: #767474;
+  /* font-weight: 600; */
+}
+.remTimeHide {
   display: none;
 }
